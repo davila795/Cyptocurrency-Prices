@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import Form from './components/Form'
 import image from './cryptomonedas.png'
 import axios from 'axios';
+import Quote from './components/Quote';
 
 const Container = styled.div`
   max-width: 900px;
@@ -70,6 +71,7 @@ const App = () => {
           setCurrency={setCurrency}
           setCryptoCurrency={setCryptoCurrency}
         />
+        <Quote apiResult={apiResult} />
       </div>
     </Container>
   );

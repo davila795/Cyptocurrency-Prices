@@ -31,6 +31,7 @@ const Form = ({ setCurrency, setCryptoCurrency }) => {
     { code: 'USD', name: 'American Dollar' },
     { code: 'EUR', name: 'Euros' },
     { code: 'GBP', name: 'Pounds' },
+    { code: 'PEN', name: 'Sol' }
   ]
 
   const [cryptoCurrencies, setCryptoCurrencies] = useState([])
