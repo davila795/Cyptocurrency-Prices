@@ -4,6 +4,7 @@ import Form from './components/Form'
 import image from './cryptomonedas.png'
 import axios from 'axios';
 import Quote from './components/Quote';
+import Spinner from './components/Spinner';
 
 const Container = styled.div`
   max-width: 900px;
@@ -38,23 +39,36 @@ const Heading = styled.h1`
   }
 `
 
-const App = () => {
+function App() {
 
   const [currency, setCurrency] = useState('')
   const [cryptoCurrency, setCryptoCurrency] = useState('')
   const [apiResult, setApiResult] = useState({})
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
 
     if (currency === '') return //  check if it's first time of loading to not to execute function
 
     const consultApi = async () => {
+
+      setLoading(true)
+
       const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${cryptoCurrency}&tsyms=${currency}`
       const response = await axios.get(url)
-      setApiResult(response.data.DISPLAY[cryptoCurrency][currency])
+
+      setTimeout(() => {
+
+        setLoading(false)
+        setApiResult(response.data.DISPLAY[cryptoCurrency][currency])
+
+      }, 1000);
     }
+
     consultApi()
   }, [currency, cryptoCurrency])
+
+  const component = loading ? <Spinner /> : <Quote apiResult={apiResult} />
 
   return (
     <Container>
@@ -71,7 +85,7 @@ const App = () => {
           setCurrency={setCurrency}
           setCryptoCurrency={setCryptoCurrency}
         />
-        <Quote apiResult={apiResult} />
+        {component}
       </div>
     </Container>
   );
