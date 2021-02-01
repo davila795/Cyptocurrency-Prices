@@ -38,7 +38,7 @@ const Form = ({ setCurrency, setCryptoCurrency }) => {
 
   const [currency, SelectCurrency] = useCurrency('Select Currency', '', Currencies)
 
-  const [cryptoCurrency, SelectCrypto] = useCrypto('Select Crypto Currency', '', cryptoCurrencies)
+  const [cryptoCurrency, SelectCrypto] = useCrypto('Select CryptoCurrency', '', cryptoCurrencies)
 
   const [error, setError] = useState(false)
 
