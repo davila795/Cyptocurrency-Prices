@@ -1,6 +1,8 @@
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled'
 import Form from './components/Form'
 import image from './cryptomonedas.png'
+import axios from 'axios';
 
 const Container = styled.div`
   max-width: 900px;
@@ -37,6 +39,22 @@ const Heading = styled.h1`
 
 const App = () => {
 
+  const [currency, setCurrency] = useState('')
+  const [cryptoCurrency, setCryptoCurrency] = useState('')
+  const [apiResult, setApiResult] = useState({})
+
+  useEffect(() => {
+
+    if (currency === '') return //  check if it's first time of loading to not to execute function
+
+    const consultApi = async () => {
+      const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${cryptoCurrency}&tsyms=${currency}`
+      const response = await axios.get(url)
+      setApiResult(response.data.DISPLAY[cryptoCurrency][currency])
+    }
+    consultApi()
+  }, [currency, cryptoCurrency])
+
   return (
     <Container>
       <div>
@@ -48,7 +66,10 @@ const App = () => {
 
       <div>
         <Heading>Crypto Prices</Heading>
-        <Form />
+        <Form
+          setCurrency={setCurrency}
+          setCryptoCurrency={setCryptoCurrency}
+        />
       </div>
     </Container>
   );

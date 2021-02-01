@@ -28,10 +28,13 @@ const useCrypto = (label, initialState, options) => {
   const SelectCrypto = () => (
     <>
       <Label>{label}</Label>
-      <Select>
-        <option>-- Select --</option>
+      <Select
+        onChange={e => setState(e.target.value)}
+        value={state}
+      >
+        <option value=''>-- Select --</option>
         {options.map(option => (
-          <option key={option.CoinInfo.Id} value={option.CoinInfo.Name}>{ option.CoinInfo.FullName}</option>
+          <option key={option.CoinInfo.Id} value={option.CoinInfo.Name}>{option.CoinInfo.FullName}</option>
         ))}
       </Select>
     </>

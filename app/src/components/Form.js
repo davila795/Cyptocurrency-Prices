@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import useCurrency from '../hooks/useCurrency'
 import useCrypto from '../hooks/useCrypto'
 import axios from 'axios';
+import Error from './Error';
 
 
 const Button = styled.input`
@@ -23,7 +24,7 @@ const Button = styled.input`
   }
 `
 
-const Form = () => {
+const Form = ({ setCurrency, setCryptoCurrency }) => {
 
   const Currencies = [
     { code: 'MXN', name: 'Mexican Peso' },
@@ -38,21 +39,38 @@ const Form = () => {
 
   const [cryptoCurrency, SelectCrypto] = useCrypto('Select Crypto Currency', '', cryptoCurrencies)
 
+  const [error, setError] = useState(false)
+
+
   useEffect(() => {
 
     const fetchApi = async () => {
-
       const url = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD'
       const response = await axios.get(url)
-
       setCryptoCurrencies(response.data.Data)
     }
-
     fetchApi()
   }, [])
 
+  const handleSubmit = (e) => {
+
+    e.preventDefault()
+
+    if (currency === '' || cryptoCurrency === '') {
+      setError(true)
+      return
+    }
+    setError(false)
+    setCurrency(currency)
+    setCryptoCurrency(cryptoCurrency)
+  }
+
   return (
-    <form>
+
+    <form
+      onSubmit={handleSubmit}
+    >
+      {error && <Error message='Incompleted Form' />}
       <SelectCurrency />
       <SelectCrypto />
       <Button
