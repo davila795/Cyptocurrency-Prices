@@ -9,6 +9,7 @@ import Spinner from './components/Spinner';
 const Container = styled.div`
   max-width: 900px;
   margin: 0 auto;
+  column-gap: 5rem;
   @media (min-width:992px) {
     display:grid;
     grid-template-columns: repeat(2, 1fr);
@@ -28,7 +29,7 @@ const Heading = styled.h1`
   font-weight:700px;
   font-size: 50px;
   margin-top: 80px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 
   &&::after{
     content: '';

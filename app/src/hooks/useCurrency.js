@@ -6,15 +6,15 @@ const Label = styled.label`
   color: #fff;
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 2.4rem;
-  margin-top: 2rem;
+  font-size: 1.8rem;
+  margin-top: 1rem;
   display: block
 `
 
 const Select = styled.select`
   width: 100%;
   display: block;
-  padding: 1rem;
+  padding: .5rem;
   -webkit-appearance: none;
   border-radius: 10px;
   border: none;
