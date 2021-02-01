@@ -23,6 +23,8 @@ const Select = styled.select`
 
 const useCrypto = (label, initialState, options) => {
 
+  console.log(options)
+
   const [state, setState] = useState(initialState)
 
   const SelectCrypto = () => (
